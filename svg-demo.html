@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>Document</title>
+    
+</head>
+<body>
+    <svg width="1000" height="950" style="border:1px #333 solid;">
+        <!-- 定义的箭头 -->
+        <defs>  
+        <marker id="markerArrow" markerWidth="8" markerHeight="8" refx="2" refy="5" orient="auto">  
+            <path d="M2,2 L2,8 L8,5 L2,2" fill="blue" />  
+        </marker>  
+        </defs>
+        <!-- path 路径使用箭头  -->
+        <path d="M50,50 L250,100 L300,-50" stroke-width="2" stroke="blue" fill="none"  marker-end="url(#markerArrow)"/> 
+        
+        <!-- line 直线使用箭头 -->
+        <line  stroke-dasharray="3,10" x1="700" y1="30" x2="700" y2="200"  stroke="blue" stroke-width="2" marker-end="url(#markerArrow)"/>
+        <!-- stroke-dasharray="3,10"  3:是线段的长  10：是间隔的距离 -->
+        <!-- polyline 折线使用箭头 -->
+        <polyline points="60,90 150,180 200,150"  stroke="blue" fill="none" stroke-width="2" marker-end="url(#markerArrow)"/>
+    
+        <!-- 圆角矩形 -->
+        <!-- 
+            Q 第一个值：小于第三个值则是左突出弧度；否则内突右突出弧度；
+            Q 第二个值：取第四个值加上  上一个坐标y(x)的一半；
+         -->
+         <!-- 虚线 stroke-dasharray="3,10" -->
+        <path stroke-dasharray="3,10" d="M400,200 Q370 220 400 240 L500,240 Q530 220 500 200" stroke="blue" fill="blue" stroke-width="1"></path>
+
+        <!-- 直线 -->
+        <line x1="450" y1="240" x2="450" y2="318"  stroke="blue" stroke-width="2" marker-end="url(#markerArrow)"/>
+        
+        <!-- 椭圆 -->
+        <ellipse cx="450" cy="380" rx="100" ry="50"  stroke="blue" fill="blue" stroke-width="1"/>
+        
+        <!-- polyline 左折线 -->
+        <polyline points="470,380 220,380 220,480"  stroke="blue" fill="none" stroke-width="2" marker-end="url(#markerArrow)"/>
+        
+        <!-- polyline 右折线 -->
+        <polyline points="550,380 690,380 690,480"  stroke="blue" fill="none" stroke-width="2" marker-end="url(#markerArrow)"/>
+        
+        <!-- 矩形 -->
+        <rect x="170" y="490" width="100" height="50" stroke="blue" fill="blue" stroke-width="1" />
+        
+        <!-- 圆形 -->
+        <circle cx="690" cy="532" r="40" stroke="blue" fill="blue" stroke-width="1"/>
+        
+        <!-- polyline 下左折线 -->
+        <polyline points="220,540 220,640 390,640"  stroke="blue" fill="none" stroke-width="2" marker-end="url(#markerArrow)"/>
+        
+        <!-- polyline 下右折线 -->
+        <polyline points="690,540 690,640 510,640"  stroke="blue" fill="none" stroke-width="2" marker-end="url(#markerArrow)"/>
+
+        <!-- 多边形 菱形 -->
+        <polygon points="450,590 400,640 450,690 500,640"  stroke="blue" fill="blue" stroke-width="1"/>
+        
+        <!-- 直线 -->
+        <line x1="450" y1="690" x2="450" y2="828"  stroke="blue" stroke-width="2" marker-end="url(#markerArrow)"/>        
+        
+        <!-- 圆角矩形 -->
+        <path d="M400,840 Q370 860 400 880 L500,880 Q530 860 500 840" stroke="blue" fill="blue" stroke-width="1"></path>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </svg>
+    
+
+    
+    
+
+</body>
+</html>

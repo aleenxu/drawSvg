@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <title>Document</title>
+    
+</head>
+<body>
+
+<svg id="svgBox" style="width:1000px;height:1000px;border:1px solid #333" xmlns="http://www.w3.org/2000/svg">
+<defs> 
+        <marker id="markerArrow" markerWidth="8" markerHeight="8" refx="2" refy="5" orient="auto">  
+            <path d="M2,2 L2,8 L8,5 L2,2" fill="blue" />  
+        </marker>  
+        </defs>  
+</svg> 
+
+
+
+<script>
+(function(){
+/* 
+1、画一个元素
+    rect:矩形（正方形）***** 大小由width和height控制
+        style属性：style="width:100px;height:50px;stroke:red; fill:blue; stroke-width:2;"
+        定位：x="170",y="490" 或 style="x:170px;y:490px"
+
+    circle:圆形 ***** 大小由半径 r控制
+        style属性：style="r:40px;stroke:red; fill:blue; stroke-width:2;"
+        定位：cx="690" cy="532" 或 style="cx:690px; cy:532px;"
+
+    ellipse:椭圆 ***** 大小由 rx ry控制
+        style属性：style="rx:100px; ry:50px;stroke:red; fill:blue; stroke-width:2;"
+        定位：cx="450" cy="380" 或 style="cx:450px; cy:380px;" 
+
+    polygon:多边形菱形 ****** 大小完全是定位处理
+        style属性：style="stroke:red; fill:blue; stroke-width:2;"   
+        定位：points="450,590 400,640 450,690 500,640"  
+
+    path:圆角矩形 ***** 大小完全是定位处理
+        style属性：style="stroke:red; fill:blue; stroke-width:2;"   
+        定位：d="M400,840 Q370 860 400 880 L500,880 Q530 860 500 840 Z"
+    
+    line:直线 ***** 两个点确定一个起始、两个点确定一个结束
+        style属性：style="stroke:red; stroke-width:2;"
+        定位：x1="450" y1="690" x2="450" y2="828" 
+        调用箭头：开始时：marker-start="url(#circle)" 结束时：marker-end="url(#arrow)" 
+    
+    polyline：折线 
+        style属性：style="stroke:red; stroke-width:2;"
+        定位：points="690,540 690,640 510,640"
+        调用箭头：开始时：marker-start="url(#circle)" 结束时：marker-end="url(#arrow)" 
+    
+    text:
+
+        定位：x="200" y="100"
+    <Shape shapeID="24" type="15" >
+						<!-- 图片
+							图片为公式编辑器生成的图片
+							x,y,图片左上点坐标，
+							width 图片宽
+							height 图片高
+							
+						-->
+					<position  x="500" y="810">
+						<!--  
+							href 图片存放的路径，算法文件夹下的/files/images/ 中
+						-->
+						<href>/files/images/demo.png</href>
+					</position>
+				</Shape>
+*/
+var arr = [
+	{
+        "type":"15",
+        "position":[{"x":"700","y":"400","width":"200","height":"60","xlink:href":"D:/upload/demo.png","href":"D:/upload/demo.png"}]  
+    }
+	,
+    {
+        "type":"1",
+        "position":[{"x":"0","y":"0","width":"100", "height":"50", "text":[{"content":"智能语音算法设计","color":"yellow","size":"16", "family":"STKaiti" }],"style":"stroke:red; fill:blue; stroke-width:2;"}]  
+    }
+	,
+	{
+        "type":"2",
+		 "position":[{"x":"100","y":"0","width":"100", "height":"50","text":[{"content":"子算法","color":"yellow","size":"16", "family":"STKaiti" }],"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    },
+	{
+        "type":"3",
+		 "position":[{"x":"200","y":"0","width":"100", "height":"50","text":[{"content":"子算法","color":"yellow","size":"16", "family":"STKaiti" }],"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    },
+	{
+        "type":"4",
+		 "position":[{"x":"300","y":"0","width":"100", "height":"100","style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    }
+	 ,
+    {
+		"type":"5",
+	
+		"position":[{"x":"450","y":"0","width":"100", "height":"100","style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    },
+    {
+        "type":"6",
+        "position":[{"x":"550","y":"0","width":"200", "height":"100","style":"stroke:red; fill:blue; stroke-width:2;"}]  
+    },
+	{
+        "type":"7",
+		 "position":[{"x":"750","y":"0","width":"150", "height":"100","style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    },
+	{
+        "type":"8",
+		 "position":[{"x":"0","y":"200","width":"150", "height":"100","style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    }
+	,
+	{
+        "type":"9",
+		 "position":[{"x":"200","y":"200","width":"150", "height":"100","text":[{"content":"我是文档","color":"red","size":"32", "family":"LiSu " }], "style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    }
+	,
+	{
+        "type":"10",
+		 "position":[{"x":"400","y":"200","width":"150", "height":"100","style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    },
+    {
+        "type":"11",
+        "position":[{"d":"M 5 350 Q 75 700 200 350","style":"stroke:red; fill:none; stroke-width:2;"} ] 
+    },
+    {
+        "type":"12",
+        "position":[{"x1":"450","y1":"410","x2":"450","y2":"528","marker-end":"","style":"stroke:red; fill:blue; stroke-width:2;"}]  
+    },
+	{
+        "type":"13",
+        "position":[{ "points":"250,410 300,490 380,410 380,520","marker-end":"","style":"stroke:red; fill:white; stroke-width:2;"}]  
+    },
+    {
+        "type":"14",
+        "position":[{"x":"600","y":"400","text":"圆角矩形","style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+    }
+]
+
+
+function DrawSvg(){}
+DrawSvg.prototype.drawShape = function(id,arrow,type,pos){
+    var el= document.createElementNS('http://www.w3.org/2000/svg', type);  
+    for (var key in pos){
+	el.setAttribute(key, pos[key]);
+        if(key == "marker-end"){
+            el.setAttribute(key, "url(#"+arrow+")");
+        }else if(key=="text"){
+            el.innerHTML=pos[key];
+        }else{
+			//alert(type);
+			//alert(pos[key]);
+			el.setAttribute(key, pos[key]);
+		}
+        
+    }  
+    var el = document.getElementById(id).appendChild(el);
+	el.onmouseover = function(){
+		//alert(1);
+	}
+}
+
+
+
+DrawSvg.prototype.drawType = function(id,arrow,type,x,y,w,h,style,text,pos){
+		
+    switch(type){
+        case "1": 
+			
+			//矩形正方形{"x":"170","y":"490","width":"100", "height":"50","style":"width:100px;height:50px;stroke:red; fill:blue; stroke-width:2;"}
+			
+			//alert(r);
+			var pos = {"x":x ,"y":y  ,"width":w , "height":h ,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"rect",pos);
+			
+			if(!(typeof text == 'undefined')){
+				
+				var content = text[0].content;
+				if(!(typeof text == 'undefined')){
+					var length = content.length;
+					var size = parseInt(text[0].size);
+					
+					var color = text[0].color;
+					var family = text[0].family;
+					
+					var x0 , y0;
+					if(size*length > w){
+						//alert("1");
+						x0 = x.toString();
+						y0 = (y+h/2+size/2).toString();
+						content = content.substr(0,w/size-1) +"…";
+					}else{
+						//alert("2");
+						x0 = (x+w/2-(length/2)*size).toString();
+						y0 = (y+h/2+size/2).toString();
+					}
+					
+					var p = {"x":x0,"y":y0, "font-size":size.toString(), "font-family":family, "text":content,"style":"stroke:"+color+";  fill:"+color+"; stroke-width:1;"} ;
+					test.drawType2("svgBox","markerArrow","14",p);
+				}
+				
+			}
+            break;
+		 case "2": 
+			//alert(typeof text == 'undefined');
+			//圆角矩形正方形{"x":"170","y":"490","width":"100", "height":"50","style":"width:100px;height:50px;stroke:red; fill:blue; stroke-width:2;"}
+			var r = 0;
+			//alert(w > h);
+			if(w > h){
+				r = h/4;
+				
+			}else{
+				r = w/4;
+			}
+			var pos = {"x":x ,"y":y,"width":w ,"rx":r, "height":h ,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"rect",pos);
+			
+			if(!(typeof text == 'undefined')){
+				
+				var content = text[0].content;
+				if(!(typeof text == 'undefined')){
+					var length = content.length;
+					var size = parseInt(text[0].size);
+					
+					var color = text[0].color;
+					var family = text[0].family;
+					
+					var x0 , y0;
+					if(size*length > w){
+						//alert("1");
+						x0 = x.toString();
+						y0 = (y+h/2+size/2).toString();
+						content = content.substr(0,w/size-1) +"…";
+					}else{
+						//alert("2");
+						x0 = (x+w/2-(length/2)*size).toString();
+						y0 = (y+h/2+size/2).toString();
+					}
+					
+					var p = {"x":x0,"y":y0, "font-size":size.toString(), "font-family":family, "text":content,"style":"stroke:"+color+";  fill:"+color+"; stroke-width:1;"} ;
+					test.drawType2("svgBox","markerArrow","14",p);
+				}
+				
+			}
+            break;
+        
+        case "3": //椭圆
+		
+			var cx = x + w/2;
+			var cy = y + h/2;
+			var rx = w/2;
+			var ry = h/2;
+			var pos = {"cx":cx,"cy":cy ,"rx":rx,"ry":ry,"style":style};
+            this.drawShape(id,arrow,"ellipse",pos);
+			
+			if(!(typeof text == 'undefined')){
+				
+				var content = text[0].content;
+				if(!(typeof text == 'undefined')){
+					var length = content.length;
+					var size = parseInt(text[0].size);
+					
+					var color = text[0].color;
+					var family = text[0].family;
+					
+					var x0 , y0;
+					if(size*length > w){
+						//alert("1");
+						x0 = x.toString();
+						y0 = (y+h/2+size/2).toString();
+						content = content.substr(0,w/size-1) +"…";
+					}else{
+						//alert("2");
+						x0 = (x+w/2-(length/2)*size).toString();
+						y0 = (y+h/2+size/2).toString();
+					}
+					
+					var p = {"x":x0,"y":y0, "font-size":size.toString(), "font-family":family, "text":content,"style":"stroke:"+color+";  fill:"+color+"; stroke-width:1;"} ;
+					test.drawType2("svgBox","markerArrow","14",p);
+				}
+				
+			}
+            break;
+		case "4": //圆形
+			//alert(typeof text == 'undefined');
+			//alert(x);
+			var cx = x + w/2;
+			var cy = y + w/2;
+			var r = w/2;
+			//alert(cy);
+			var pos = {"cx":cx ,"cy":cy ,"r":r ,"style":style};
+			//alert(pos);
+			this.drawShape(id,arrow,"circle",pos);
+            break;
+        case "5": //多边形(菱形)
+			
+			var x1 = x + w/2;
+			//alert(x1);
+			var y1 = y;
+			var x2 = x;
+			var y2 = y + h/2;
+			var x3 = x + w/2;
+			var y3 = y + h;
+			var x4 = x + w;
+			var y4 = y + h/2;
+			//"450,590 400,640 450,690 500,640"
+			var points = x1.toString() +","+y1.toString()+" "+ x2.toString() +","+y2.toString()+" "+ x3.toString() +","+y3.toString()+" "+ x4.toString() +","+y4.toString();
+			//alert(points);
+			//"position":[{"points":points,"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+			var pos = {"points":points,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"polygon",pos);
+            break;
+        
+		case "6"://三角形
+			var x1 = x + w/2;
+			var y1 = y;
+			var x2 = x;
+			var y2 = y + h;
+			var x3 = x + w;
+			var y3 = y + h;
+			
+			
+			var points = x1.toString() +","+y1.toString()+" "+ x2.toString() +","+y2.toString()+" "+ x3.toString() +","+y3.toString();
+			//alert(points);
+			//"position":[{"points":points,"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+			var pos = {"points":points,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"polygon",pos);
+            break;
+		case "7"://直角三角形
+			var x1 = x;
+			var y1 = y;
+			var x2 = x;
+			var y2 = y + h;
+			var x3 = x + w;
+			var y3 = y + h;
+			
+			
+			var points = x1.toString() +","+y1.toString()+" "+ x2.toString() +","+y2.toString()+" "+ x3.toString() +","+y3.toString();
+			//alert(points);
+			//"position":[{"points":points,"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+			var pos = {"points":points,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"polygon",pos);
+            break;
+		case "8"://平行四边形
+			var x1 = x + w/5;
+			var y1 = y;
+			var x2 = x;
+			var y2 = y + h;
+			var x3 = x + w - w/5;
+			var y3 = y + h;
+			var x4 = x + w;
+			var y4 = y;
+			//alert(y4);
+			var points = x1.toString() +","+y1.toString()+" "+ x2.toString() +","+y2.toString()+" "+ x3.toString() +","+y3.toString() +" "+ x4.toString() +","+y4.toString();
+			//alert(points);
+			//"position":[{"points":points,"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+			var pos = {"points":points,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"polygon",pos); 
+            break;
+		case "9"://画文档形状图
+			var x1 = x;
+			var y1 = y;
+			var x2 = x;
+			var y2 = y + h;
+			var x3 = w + x;
+			var y3 = y + h;
+			var x4 = w + x;
+			var y4 = y + h/6;
+			var x5 = x + w/3;
+			var y5 = y + h/6;
+			var x6 = x + w/4;
+			var y6 = y;
+			var points = x1.toString() +","+y1.toString()+" "+ x2.toString() +","+y2.toString()+" "+ x3.toString() +","+y3.toString() +" "+ x4.toString() +","+y4.toString() +" "+ x5.toString() +","+y5.toString() +" "+ x6.toString() +","+y6.toString();
+			//alert(points);
+			//"position":[{"points":points,"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+			var pos = {"points":points,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"polygon",pos);
+			if(!(typeof text == 'undefined')){
+				
+				var content = text[0].content;
+				if(!(typeof text == 'undefined')){
+					var length = content.length;
+					var color = text[0].color;
+					var size = parseInt(text[0].size);
+					var family = text[0].family;
+					
+					
+					var p = {"x":(x+w/2-(length/2)*size).toString(),"y":(y+h/2+size/2).toString(), "font-size":size.toString(), "font-family":family, "text":content,"style":"stroke:"+color+";  fill:"+color+"; stroke-width:1;"} ;
+					test.drawType2("svgBox","markerArrow","14",p);
+				}
+				
+			}
+			break;
+		case "10": //多边形(梯形)
+			
+			var x1 = x + w/5;
+			//alert(x1);
+			var y1 = y;
+			var x2 = x;
+			var y2 = y + h;
+			var x3 = x + w;
+			var y3 = y + h;
+			var x4 = x + w - w/5;
+			var y4 = y;
+			//"450,590 400,640 450,690 500,640"
+			var points = x1.toString() +","+y1.toString()+" "+ x2.toString() +","+y2.toString()+" "+ x3.toString() +","+y3.toString()+" "+ x4.toString() +","+y4.toString();
+			//alert(points);
+			//"position":[{"points":points,"style":"stroke:red; fill:blue; stroke-width:2;"} ] 
+			var pos = {"points":points,"style":style};
+			//alert(pos);
+            this.drawShape(id,arrow,"polygon",pos);
+            break;
+		 case "11": //圆角形状
+            this.drawShape(id,arrow,"path",pos);
+            break;
+        case "12": //直线
+            this.drawShape(id,arrow,"line",pos);
+            break;
+        case "13": //折线
+            this.drawShape(id,arrow,"polyline",pos);
+            break;
+        case "14": //文本字体
+            this.drawShape(id,arrow,"text",pos);
+            break;
+		case "15"://图片
+		//xlink:href="/file/demo.png"   y="500px" x="200"
+		//var href = "xlink:href:"pos["href"];
+			//var pos = "";
+			//alert(pos["href"]);
+			this.drawShape(id,arrow,"image",pos);
+		
+    }
+	
+	
+}
+
+DrawSvg.prototype.drawType2 = function(id,arrow,type,pos){
+    switch(type){
+        case "11": //圆角形状
+            this.drawShape(id,arrow,"path",pos);
+            break;
+        case "12": //直线
+            this.drawShape(id,arrow,"line",pos);
+            break;
+        case "13": //折线
+            this.drawShape(id,arrow,"polyline",pos);
+            break;
+        case "14": //文本字体
+            this.drawShape(id,arrow,"text",pos);
+            break;
+		case "15"://图片
+			alert(pos);
+			this.drawShape(id,arrow,"text",pos);
+    }
+	
+}	
+	
+var test = new DrawSvg();
+for(var i=0;i<arr.length;i++){
+	var type = arr[i].type;
+	
+	//alert(type);
+	var p = arr[i].position[0];
+	
+	var x = parseInt(p.x);
+	var y = parseInt(p.y);
+	var w = parseInt(p.width);
+	var h = parseInt(p.height);
+	var style = p.style;
+	//alert(x+y+w+h);
+	var text = p.text;
+	//alert( typeof text );
+	if(type != "15"){
+	
+		test.drawType("svgBox","markerArrow",type,x,y,w,h,style,text,p);
+   }
+	
+}
+for(var i=0;i<arr.length;i++){
+	var type = arr[i].type;
+	
+	//alert(type);
+	var p = arr[i].position[0];
+	
+	var x = parseInt(p.x);
+	var y = parseInt(p.y);
+	var w = parseInt(p.width);
+	var h = parseInt(p.height);
+	var style = p.style;
+	//alert(x+y+w+h);
+	var text = p.text;
+	//alert( typeof text );
+	if(type == "15"){
+		test.drawType("svgBox","markerArrow",type,x,y,w,h,style,text,p);
+   }
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}())
+
+</script>
+</body>
+</html>
